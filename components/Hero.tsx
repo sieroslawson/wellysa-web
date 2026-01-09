@@ -3,12 +3,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-declare global {
-  interface Window {
-    Intercom?: (action: string, ...args: any[]) => void;
-  }
-}
-
 const navItems = [
   { id: 'profil', label: 'PROFIL', icon: '👤', position: 'left-top' },
   { id: 'wiedza', label: 'WIEDZA', icon: '📚', position: 'left-center' },
