@@ -11,11 +11,8 @@ import OnboardingFlow from '@/components/OnboardingFlow';
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Above the fold - Hero with Ludzik */}
+      {/* Above the fold - Hero with Ludzik and integrated navigation */}
       <Hero />
-      
-      {/* Main Navigation */}
-      <MainNavigation />
       
       {/* Assistant Chatbot */}
       <Assistant />
