@@ -19,12 +19,12 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
         ic('update', w.intercomSettings);
       } else {
         var d = document;
-        var i = function() {
-          i.c(arguments);
+        var i: any = function() {
+          (i as any).c(arguments);
         };
-        i.q = [];
-        i.c = function(args: any) {
-          i.q.push(args);
+        (i as any).q = [];
+        (i as any).c = function(args: any) {
+          (i as any).q.push(args);
         };
         w.Intercom = i;
         var l = function() {
