@@ -47,7 +47,7 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
 
     // Configure Intercom
     const appId = process.env.NEXT_PUBLIC_INTERCOM_APP_ID;
-    if (appId) {
+    if (appId && window.Intercom) {
       window.Intercom('boot', {
         app_id: appId,
         hide_default_launcher: true, // We'll use custom launcher
