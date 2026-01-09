@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const navItems = [
   { id: 'profil', label: 'PROFIL', icon: '👤', position: 'top-left' },
@@ -37,106 +38,45 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center">
           {/* Ludzik z nawigacją wokół */}
           <div className="relative w-full max-w-2xl mx-auto mb-12">
-            {/* Ludzik - duży zielony kółek jako głowa z mniejszym kółkiem w prawym górnym rogu */}
+            {/* Ludzik - obraz PNG z załącznika */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
               className="relative mx-auto flex items-center justify-center"
-              style={{ width: '300px', height: '400px' }}
+              style={{ width: '300px', height: '500px' }}
             >
-              {/* Główna głowa - duży wypełniony zielony kółek */}
+              {/* Obraz awatara ludzika */}
               <div className="relative">
-                {/* Duży zielony kółek jako głowa */}
-                <div 
-                  className="rounded-full bg-wellysa-green"
-                  style={{ 
-                    width: '200px', 
-                    height: '200px',
-                    boxShadow: '0 10px 30px rgba(76, 175, 80, 0.3)'
+                <Image
+                  src="/avatar.png"
+                  alt="Wellysa Avatar"
+                  width={300}
+                  height={500}
+                  className="object-contain"
+                  priority
+                  style={{
+                    filter: 'drop-shadow(0 10px 30px rgba(76, 175, 80, 0.3))'
+                  }}
+                />
+                
+                {/* Mniejszy kółek w prawym górnym rogu głowy z emoji robota (Asystent) */}
+                <div
+                  className="absolute rounded-full bg-green-100 flex items-center justify-center"
+                  style={{
+                    width: '60px',
+                    height: '60px',
+                    top: '20px',
+                    right: '20px',
+                    border: '3px solid white',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                   }}
                 >
-                  {/* Mniejszy kółek w prawym górnym rogu z emoji robota */}
-                  <div
-                    className="absolute rounded-full bg-green-100 flex items-center justify-center"
-                    style={{
-                      width: '60px',
-                      height: '60px',
-                      top: '10px',
-                      right: '10px',
-                      border: '3px solid white',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                    }}
-                  >
-                    <span className="text-3xl">🤖</span>
-                  </div>
+                  <span className="text-3xl">🤖</span>
                 </div>
-
-                {/* Tułów - linia pod głową */}
-                <div 
-                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
-                  style={{
-                    width: '12px',
-                    height: '120px',
-                    top: '200px',
-                    borderRadius: '6px'
-                  }}
-                />
-
-                {/* Ręce */}
-                <div 
-                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
-                  style={{
-                    width: '12px',
-                    height: '80px',
-                    top: '200px',
-                    left: 'calc(50% - 40px)',
-                    transform: 'translateX(-50%) rotate(-35deg)',
-                    borderRadius: '6px',
-                    transformOrigin: 'top center'
-                  }}
-                />
-                <div 
-                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
-                  style={{
-                    width: '12px',
-                    height: '80px',
-                    top: '200px',
-                    left: 'calc(50% + 40px)',
-                    transform: 'translateX(-50%) rotate(35deg)',
-                    borderRadius: '6px',
-                    transformOrigin: 'top center'
-                  }}
-                />
-
-                {/* Nogi */}
-                <div 
-                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
-                  style={{
-                    width: '12px',
-                    height: '100px',
-                    top: '320px',
-                    left: 'calc(50% - 30px)',
-                    transform: 'translateX(-50%) rotate(15deg)',
-                    borderRadius: '6px',
-                    transformOrigin: 'top center'
-                  }}
-                />
-                <div 
-                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
-                  style={{
-                    width: '12px',
-                    height: '100px',
-                    top: '320px',
-                    left: 'calc(50% + 30px)',
-                    transform: 'translateX(-50%) rotate(-15deg)',
-                    borderRadius: '6px',
-                    transformOrigin: 'top center'
-                  }}
-                />
               </div>
 
-              {/* 4 ikony równomiernie rozmieszczone wokół głowy */}
+              {/* 4 ikony równomiernie rozmieszczone wokół głowy ludzika */}
               {/* PROFIL - top-left */}
               <motion.button
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -152,8 +92,8 @@ export default function Hero() {
                   }
                 `}
                 style={{
-                  top: '-20px',
-                  left: '-20px'
+                  top: '20px',
+                  left: '-30px'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -177,8 +117,8 @@ export default function Hero() {
                   }
                 `}
                 style={{
-                  top: '-20px',
-                  right: '-20px'
+                  top: '20px',
+                  right: '-30px'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -202,8 +142,8 @@ export default function Hero() {
                   }
                 `}
                 style={{
-                  bottom: '80px',
-                  left: '-20px'
+                  bottom: '100px',
+                  left: '-30px'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -227,8 +167,8 @@ export default function Hero() {
                   }
                 `}
                 style={{
-                  bottom: '80px',
-                  right: '-20px'
+                  bottom: '100px',
+                  right: '-30px'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
