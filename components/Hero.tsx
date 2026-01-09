@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const navItems = [
-  { id: 'profil', label: 'PROFIL', icon: '👤', position: 'left-top' },
-  { id: 'wiedza', label: 'WIEDZA', icon: '📚', position: 'left-center' },
-  { id: 'asystent', label: 'ASYSTENT', icon: '🤖', position: 'center-top', highlight: true },
-  { id: 'wyniki', label: 'WYNIKI', icon: '❤️', position: 'right-center' },
-  { id: 'wspolpraca', label: 'WSPÓŁPRACA', icon: '📄', position: 'right-top' },
+  { id: 'profil', label: 'PROFIL', icon: '👤', position: 'top-left' },
+  { id: 'wiedza', label: 'WIEDZA', icon: '📚', position: 'bottom-left' },
+  { id: 'asystent', label: 'ASYSTENT', icon: '🤖', position: 'center', highlight: true },
+  { id: 'wyniki', label: 'WYNIKI', icon: '❤️', position: 'bottom-right' },
+  { id: 'wspolpraca', label: 'WSPÓŁPRACA', icon: '📄', position: 'top-right' },
 ];
 
 export default function Hero() {
@@ -37,161 +37,204 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center">
           {/* Ludzik z nawigacją wokół */}
           <div className="relative w-full max-w-2xl mx-auto mb-12">
-            {/* Ludzik - sylwetka człowieka w kolorze teal/zielonym */}
+            {/* Ludzik - duży zielony kółek jako głowa z mniejszym kółkiem w prawym górnym rogu */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="relative mx-auto"
-              style={{ width: '400px', height: '600px' }}
+              className="relative mx-auto flex items-center justify-center"
+              style={{ width: '300px', height: '400px' }}
             >
-              {/* SVG Ludzik - sylwetka człowieka */}
-              <svg
-                viewBox="0 0 200 300"
-                className="w-full h-full"
-                style={{ filter: 'drop-shadow(0 10px 30px rgba(76, 175, 80, 0.3))' }}
-              >
-                {/* Głowa */}
-                <circle
-                  cx="100"
-                  cy="50"
-                  r="35"
-                  fill="none"
-                  stroke="#4CAF50"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                {/* Tułów */}
-                <path
-                  d="M 100 85 L 100 200"
-                  fill="none"
-                  stroke="#4CAF50"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                {/* Ręce */}
-                <path
-                  d="M 100 120 L 60 160 M 100 120 L 140 160"
-                  fill="none"
-                  stroke="#4CAF50"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                {/* Nogi */}
-                <path
-                  d="M 100 200 L 70 280 M 100 200 L 130 280"
-                  fill="none"
-                  stroke="#4CAF50"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-              </svg>
+              {/* Główna głowa - duży wypełniony zielony kółek */}
+              <div className="relative">
+                {/* Duży zielony kółek jako głowa */}
+                <div 
+                  className="rounded-full bg-wellysa-green"
+                  style={{ 
+                    width: '200px', 
+                    height: '200px',
+                    boxShadow: '0 10px 30px rgba(76, 175, 80, 0.3)'
+                  }}
+                >
+                  {/* Mniejszy kółek w prawym górnym rogu z emoji robota */}
+                  <div
+                    className="absolute rounded-full bg-green-100 flex items-center justify-center"
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                      top: '10px',
+                      right: '10px',
+                      border: '3px solid white',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                    }}
+                  >
+                    <span className="text-3xl">🤖</span>
+                  </div>
+                </div>
 
-              {/* Nawigacja wokół ludzika - 5 ikon w łuku nad górną częścią */}
-              {/* PROFIL - lewy górny (nad głową) */}
+                {/* Tułów - linia pod głową */}
+                <div 
+                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
+                  style={{
+                    width: '12px',
+                    height: '120px',
+                    top: '200px',
+                    borderRadius: '6px'
+                  }}
+                />
+
+                {/* Ręce */}
+                <div 
+                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
+                  style={{
+                    width: '12px',
+                    height: '80px',
+                    top: '200px',
+                    left: 'calc(50% - 40px)',
+                    transform: 'translateX(-50%) rotate(-35deg)',
+                    borderRadius: '6px',
+                    transformOrigin: 'top center'
+                  }}
+                />
+                <div 
+                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
+                  style={{
+                    width: '12px',
+                    height: '80px',
+                    top: '200px',
+                    left: 'calc(50% + 40px)',
+                    transform: 'translateX(-50%) rotate(35deg)',
+                    borderRadius: '6px',
+                    transformOrigin: 'top center'
+                  }}
+                />
+
+                {/* Nogi */}
+                <div 
+                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
+                  style={{
+                    width: '12px',
+                    height: '100px',
+                    top: '320px',
+                    left: 'calc(50% - 30px)',
+                    transform: 'translateX(-50%) rotate(15deg)',
+                    borderRadius: '6px',
+                    transformOrigin: 'top center'
+                  }}
+                />
+                <div 
+                  className="absolute left-1/2 transform -translate-x-1/2 bg-wellysa-green"
+                  style={{
+                    width: '12px',
+                    height: '100px',
+                    top: '320px',
+                    left: 'calc(50% + 30px)',
+                    transform: 'translateX(-50%) rotate(-15deg)',
+                    borderRadius: '6px',
+                    transformOrigin: 'top center'
+                  }}
+                />
+              </div>
+
+              {/* 4 ikony równomiernie rozmieszczone wokół głowy */}
+              {/* PROFIL - top-left */}
               <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
                 onClick={() => scrollToSection('profil')}
                 className={`
-                  absolute top-0 left-16 w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg
+                  absolute w-14 h-14 rounded-full flex items-center justify-center
+                  transition-all shadow-lg bg-white border-2
                   ${activeItem === 'profil' 
-                    ? 'bg-wellysa-green text-white scale-110 ring-2 ring-wellysa-green' 
-                    : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-wellysa-green'
+                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
+                    : 'border-gray-300 hover:border-wellysa-green'
                   }
                 `}
+                style={{
+                  top: '-20px',
+                  left: '-20px'
+                }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 title="PROFIL"
               >
-                <span className="text-xl">👤</span>
+                <span className="text-2xl">👤</span>
               </motion.button>
 
-              {/* WIEDZA - lewy środkowy (nad ramieniem) */}
+              {/* WSPÓŁPRACA - top-right */}
               <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => scrollToSection('wiedza')}
-                className={`
-                  absolute top-24 left-8 w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg
-                  ${activeItem === 'wiedza' 
-                    ? 'bg-wellysa-green text-white scale-110 ring-2 ring-wellysa-green' 
-                    : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-wellysa-green'
-                  }
-                `}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                title="WIEDZA"
-              >
-                <span className="text-xl">📚</span>
-              </motion.button>
-
-              {/* ASYSTENT - centralnie nad klatką piersiową (najważniejszy) */}
-              <motion.button
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                onClick={() => scrollToSection('asystent')}
-                className={`
-                  absolute top-16 left-1/2 transform -translate-x-1/2 w-18 h-18 rounded-full flex items-center justify-center
-                  transition-all shadow-xl z-10
-                  ${activeItem === 'asystent' 
-                    ? 'bg-wellysa-green text-white scale-110 ring-4 ring-wellysa-green ring-opacity-40' 
-                    : 'bg-wellysa-green text-white border-4 border-white shadow-2xl'
-                  }
-                `}
-                style={{ width: '72px', height: '72px' }}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.95 }}
-                title="ASYSTENT"
-              >
-                <span className="text-2xl">🤖</span>
-              </motion.button>
-
-              {/* WYNIKI - prawy środkowy (nad ramieniem) */}
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => scrollToSection('wyniki')}
-                className={`
-                  absolute top-24 right-8 w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg
-                  ${activeItem === 'wyniki' 
-                    ? 'bg-wellysa-green text-white scale-110 ring-2 ring-wellysa-green' 
-                    : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-wellysa-green'
-                  }
-                `}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                title="WYNIKI"
-              >
-                <span className="text-xl">❤️</span>
-              </motion.button>
-
-              {/* WSPÓŁPRACA - prawy górny (nad głową) */}
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
                 onClick={() => scrollToSection('wspolpraca')}
                 className={`
-                  absolute top-0 right-16 w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg
+                  absolute w-14 h-14 rounded-full flex items-center justify-center
+                  transition-all shadow-lg bg-white border-2
                   ${activeItem === 'wspolpraca' 
-                    ? 'bg-wellysa-green text-white scale-110 ring-2 ring-wellysa-green' 
-                    : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-wellysa-green'
+                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
+                    : 'border-gray-300 hover:border-wellysa-green'
                   }
                 `}
+                style={{
+                  top: '-20px',
+                  right: '-20px'
+                }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 title="WSPÓŁPRACA"
               >
-                <span className="text-xl">📄</span>
+                <span className="text-2xl">📄</span>
+              </motion.button>
+
+              {/* WIEDZA - bottom-left */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 }}
+                onClick={() => scrollToSection('wiedza')}
+                className={`
+                  absolute w-14 h-14 rounded-full flex items-center justify-center
+                  transition-all shadow-lg bg-white border-2
+                  ${activeItem === 'wiedza' 
+                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
+                    : 'border-gray-300 hover:border-wellysa-green'
+                  }
+                `}
+                style={{
+                  bottom: '80px',
+                  left: '-20px'
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                title="WIEDZA"
+              >
+                <span className="text-2xl">📚</span>
+              </motion.button>
+
+              {/* WYNIKI - bottom-right */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 }}
+                onClick={() => scrollToSection('wyniki')}
+                className={`
+                  absolute w-14 h-14 rounded-full flex items-center justify-center
+                  transition-all shadow-lg bg-white border-2
+                  ${activeItem === 'wyniki' 
+                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
+                    : 'border-gray-300 hover:border-wellysa-green'
+                  }
+                `}
+                style={{
+                  bottom: '80px',
+                  right: '-20px'
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                title="WYNIKI"
+              >
+                <span className="text-2xl">❤️</span>
               </motion.button>
             </motion.div>
 
