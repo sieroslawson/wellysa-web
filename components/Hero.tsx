@@ -242,7 +242,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4"
           >
             <a
-              href="https://apps.apple.com/app/wellysa"
+              href="https://wellysa.com/pobierz"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-wellysa-green text-white rounded-lg font-semibold hover:bg-green-600 transition-colors shadow-lg"

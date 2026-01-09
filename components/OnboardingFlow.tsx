@@ -51,7 +51,7 @@ export default function OnboardingFlow() {
       setCurrentStep(currentStep + 1);
     } else {
       // Last step - redirect to app
-      window.open('https://apps.apple.com/app/wellysa', '_blank');
+      window.open('https://wellysa.com/pobierz', '_blank');
       setIsOpen(false);
     }
   };

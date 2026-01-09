@@ -67,7 +67,9 @@ export default function ResultsSection() {
           {/* Main CTA */}
           <div className="text-center mt-12">
             <a
-              href="https://apps.apple.com/app/wellysa"
+              href="https://wellysa.com/pobierz"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block px-8 py-4 bg-wellysa-green text-white rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors shadow-lg"
             >
               Tu Znajdziesz Swoje Metryki – Pobierz Apkę

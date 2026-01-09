@@ -66,7 +66,7 @@ export default function CollaborationSection() {
                 viewport={{ once: true }}
                 onClick={() => {
                   if (type.id === 'klient') {
-                    window.open('https://apps.apple.com/app/wellysa', '_blank');
+                    window.open('https://wellysa.com/pobierz', '_blank');
                   } else {
                     setSelectedType(type.id);
                   }

@@ -16,8 +16,8 @@ export const config = {
     gaId: process.env.NEXT_PUBLIC_GA_ID || '',
   },
   appStore: {
-    ios: process.env.NEXT_PUBLIC_APP_STORE_IOS || 'https://apps.apple.com/app/wellysa',
-    android: process.env.NEXT_PUBLIC_APP_STORE_ANDROID || 'https://play.google.com/store/apps/details?id=com.wellysa',
+    ios: process.env.NEXT_PUBLIC_APP_STORE_IOS || 'https://wellysa.com/pobierz',
+    android: process.env.NEXT_PUBLIC_APP_STORE_ANDROID || 'https://wellysa.com/pobierz',
   },
   social: {
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || 'https://facebook.com/wellysa',
