@@ -17,12 +17,32 @@ export default function NewsletterPopup() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    // Show popup after 30 seconds
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 30000);
+    if (typeof window === 'undefined') return;
 
-    return () => clearTimeout(timer);
+    // Sprawdź czy popup był już pokazany
+    const popupShown = localStorage.getItem('wellysa_newsletter_popup_shown');
+    const visitCount = parseInt(localStorage.getItem('wellysa_visit_count') || '0', 10);
+    const lastVisitDate = localStorage.getItem('wellysa_last_visit_date');
+    const today = new Date().toDateString();
+
+    // Jeśli to nowy dzień, zaktualizuj datę ostatniej wizyty
+    if (lastVisitDate !== today) {
+      const newVisitCount = visitCount + 1;
+      localStorage.setItem('wellysa_visit_count', newVisitCount.toString());
+      localStorage.setItem('wellysa_last_visit_date', today);
+
+      // Pokaż popup za pierwszym razem lub co 3 wizytę
+      const shouldShow = !popupShown || (newVisitCount % 3 === 0);
+
+      if (shouldShow) {
+        // Show popup after 30 seconds
+        const timer = setTimeout(() => {
+          setIsVisible(true);
+        }, 30000);
+
+        return () => clearTimeout(timer);
+      }
+    }
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,6 +51,18 @@ export default function NewsletterPopup() {
     alert('Dziękujemy za zapisanie się do newslettera!');
     setEmail('');
     setIsVisible(false);
+    // Oznacz że popup został pokazany
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('wellysa_newsletter_popup_shown', 'true');
+    }
+  };
+
+  const handleClose = () => {
+    setIsVisible(false);
+    // Oznacz że popup został pokazany (nawet jeśli zamknięty bez zapisu)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('wellysa_newsletter_popup_shown', 'true');
+    }
   };
 
   return (
@@ -41,7 +73,7 @@ export default function NewsletterPopup() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setIsVisible(false)}
+          onClick={handleClose}
         >
           <motion.div
             initial={{ scale: 0.9, y: 20 }}
@@ -51,7 +83,7 @@ export default function NewsletterPopup() {
             className="bg-white rounded-lg p-8 max-w-md w-full"
           >
             <button
-              onClick={() => setIsVisible(false)}
+              onClick={handleClose}
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
               aria-label="Zamknij"
             >
