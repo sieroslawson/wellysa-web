@@ -80,23 +80,23 @@ export default function NewsletterPopup() {
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-lg p-8 max-w-md w-full"
+            className="bg-white rounded-lg p-8 max-w-md w-full relative"
           >
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+              className="absolute -top-2 -right-2 w-8 h-8 flex items-center justify-center bg-white text-black hover:bg-gray-100 rounded-full transition-colors shadow-lg border-2 border-gray-200"
               aria-label="Zamknij"
             >
               <svg
                 className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
+                strokeWidth={3}
                 viewBox="0 0 24 24"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
