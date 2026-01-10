@@ -4,12 +4,19 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
 
+// Pozycje ikon - dostosowane do obrazu PNG (ikony są równomiernie rozmieszczone)
+// Jeśli obraz ma 320px szerokości i 5 ikon po ~56px każda z odstępami
+const iconSize = 56;
+const iconSpacing = 8; // Odstęp między ikonami
+const totalWidth = 320;
+const startX = (totalWidth - (5 * iconSize + 4 * iconSpacing)) / 2; // Wyśrodkowanie
+
 const navItems = [
-  { id: 'profil', label: 'PROFIL', position: 0, x: 0 },
-  { id: 'wiedza', label: 'WIEDZA', position: 1, x: 64 },
-  { id: 'asystent', label: 'ASYSTENT', position: 2, x: 128, highlight: true },
-  { id: 'wyniki', label: 'WYNIKI', position: 3, x: 192 },
-  { id: 'wspolpraca', label: 'WSPÓŁPRACA', position: 4, x: 256 },
+  { id: 'profil', label: 'PROFIL', position: 0, x: startX },
+  { id: 'wiedza', label: 'WIEDZA', position: 1, x: startX + iconSize + iconSpacing },
+  { id: 'asystent', label: 'ASYSTENT', position: 2, x: startX + 2 * (iconSize + iconSpacing), highlight: true },
+  { id: 'wyniki', label: 'WYNIKI', position: 3, x: startX + 3 * (iconSize + iconSpacing) },
+  { id: 'wspolpraca', label: 'WSPÓŁPRACA', position: 4, x: startX + 4 * (iconSize + iconSpacing) },
 ];
 
 export default function Hero() {
@@ -87,7 +94,7 @@ export default function Hero() {
                     style={{ display: iconsImageLoaded ? 'block' : 'none' }}
                   />
                   
-                  {/* Klikalne obszary nad każdą ikoną */}
+                  {/* Klikalne obszary dokładnie nad ikonami */}
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
@@ -99,19 +106,21 @@ export default function Hero() {
                         absolute rounded-full
                         transition-all cursor-pointer
                         ${activeItem === item.id 
-                          ? 'ring-4 ring-wellysa-green ring-opacity-40 scale-110' 
-                          : 'hover:scale-105'
+                          ? 'ring-4 ring-wellysa-green ring-opacity-40' 
+                          : ''
                         }
                       `}
                       style={{
-                        width: '56px',
-                        height: '56px',
+                        width: `${iconSize}px`,
+                        height: `${iconSize}px`,
                         left: `${item.x}px`,
                         top: '0px',
                         background: 'transparent',
-                        border: activeItem === item.id ? '3px solid rgba(76, 175, 80, 0.5)' : 'none'
+                        border: 'none',
+                        // Debug: można dodać border do sprawdzenia wyrównania
+                        // border: '1px solid red'
                       }}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       title={item.label}
                     />
