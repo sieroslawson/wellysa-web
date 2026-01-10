@@ -5,15 +5,16 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 const navItems = [
-  { id: 'profil', label: 'PROFIL', position: 0 },
-  { id: 'wiedza', label: 'WIEDZA', position: 1 },
-  { id: 'asystent', label: 'ASYSTENT', position: 2, highlight: true },
-  { id: 'wyniki', label: 'WYNIKI', position: 3 },
-  { id: 'wspolpraca', label: 'WSPÓŁPRACA', position: 4 },
+  { id: 'profil', label: 'PROFIL', position: 0, x: 0 },
+  { id: 'wiedza', label: 'WIEDZA', position: 1, x: 64 },
+  { id: 'asystent', label: 'ASYSTENT', position: 2, x: 128, highlight: true },
+  { id: 'wyniki', label: 'WYNIKI', position: 3, x: 192 },
+  { id: 'wspolpraca', label: 'WSPÓŁPRACA', position: 4, x: 256 },
 ];
 
 export default function Hero() {
   const [activeItem, setActiveItem] = useState<string | null>('asystent');
+  const [iconsImageLoaded, setIconsImageLoaded] = useState(false);
 
   const scrollToSection = (id: string) => {
     if (id === 'asystent') {
@@ -62,7 +63,6 @@ export default function Hero() {
               </div>
 
               {/* 5 ikon w linii na wysokości klatki piersiowej ludzika */}
-              {/* Używamy obrazu PNG z ikonami jeśli dostępny, w przeciwnym razie SVG */}
               <div 
                 className="absolute flex items-center justify-center"
                 style={{
@@ -70,63 +70,90 @@ export default function Hero() {
                   left: '50%',
                   transform: 'translateX(-50%)',
                   zIndex: 10,
-                  width: '320px' // Szerokość dla 5 ikon z odstępami
+                  width: '320px',
+                  height: '56px'
                 }}
               >
-                {/* Obraz PNG z ikonami - jeśli dostępny */}
-                <Image
-                  src="/icons-line.png"
-                  alt="Navigation Icons"
-                  width={320}
-                  height={56}
-                  className="object-contain"
-                  style={{ display: 'none' }} // Ukryj domyślnie, pokaż tylko jeśli plik istnieje
-                  onError={(e) => {
-                    // Jeśli obraz nie istnieje, ukryj go
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
-                  onLoad={(e) => {
-                    // Jeśli obraz się załadował, pokaż go i ukryj przyciski SVG
-                    (e.target as HTMLImageElement).style.display = 'block';
-                    const buttons = document.querySelectorAll('.icon-button-svg');
-                    buttons.forEach(btn => (btn as HTMLElement).style.display = 'none');
-                  }}
-                />
-                
-                {/* Fallback: SVG ikony w linii */}
-                <div className="flex items-center justify-center gap-2 icon-button-svg">
+                {/* Obraz PNG z ikonami */}
+                <div className="relative" style={{ width: '320px', height: '56px' }}>
+                  <Image
+                    src="/icons-line.png"
+                    alt="Navigation Icons"
+                    width={320}
+                    height={56}
+                    className="object-contain"
+                    onLoad={() => setIconsImageLoaded(true)}
+                    onError={() => setIconsImageLoaded(false)}
+                    style={{ display: iconsImageLoaded ? 'block' : 'none' }}
+                  />
+                  
+                  {/* Klikalne obszary nad każdą ikoną */}
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       transition={{ delay: 0.3 + index * 0.1 }}
                       onClick={() => scrollToSection(item.id)}
                       className={`
-                        rounded-full flex items-center justify-center
-                        transition-all shadow-lg cursor-pointer icon-button-svg
+                        absolute rounded-full
+                        transition-all cursor-pointer
                         ${activeItem === item.id 
-                          ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                          ? 'ring-4 ring-wellysa-green ring-opacity-40 scale-110' 
                           : 'hover:scale-105'
                         }
                       `}
                       style={{
                         width: '56px',
                         height: '56px',
-                        background: item.highlight ? '#4CAF50' : '#4CAF50',
-                        border: '3px solid white',
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                        left: `${item.x}px`,
+                        top: '0px',
+                        background: 'transparent',
+                        border: activeItem === item.id ? '3px solid rgba(76, 175, 80, 0.5)' : 'none'
                       }}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                       title={item.label}
-                    >
-                      <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                        <span className="text-xs text-wellysa-green font-bold">{item.label.charAt(0)}</span>
-                      </div>
-                    </motion.button>
+                    />
                   ))}
                 </div>
+
+                {/* Fallback: SVG ikony jeśli obraz PNG nie istnieje */}
+                {!iconsImageLoaded && (
+                  <div className="flex items-center justify-center gap-2">
+                    {navItems.map((item, index) => (
+                      <motion.button
+                        key={item.id}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 + index * 0.1 }}
+                        onClick={() => scrollToSection(item.id)}
+                        className={`
+                          rounded-full flex items-center justify-center
+                          transition-all shadow-lg cursor-pointer
+                          ${activeItem === item.id 
+                            ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                            : 'hover:scale-105'
+                          }
+                        `}
+                        style={{
+                          width: '56px',
+                          height: '56px',
+                          background: '#4CAF50',
+                          border: '3px solid white',
+                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                        }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        title={item.label}
+                      >
+                        <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                          <span className="text-xs text-wellysa-green font-bold">{item.label.charAt(0)}</span>
+                        </div>
+                      </motion.button>
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
 
