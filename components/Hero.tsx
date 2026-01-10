@@ -3,14 +3,13 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
-import { ProfileIcon, KnowledgeIcon, AssistantIcon, ResultsIcon, CollaborationIcon } from './Icons';
 
 const navItems = [
-  { id: 'profil', label: 'PROFIL', icon: '👤', position: 'top-left' },
-  { id: 'wiedza', label: 'WIEDZA', icon: '📚', position: 'bottom-left' },
-  { id: 'asystent', label: 'ASYSTENT', icon: '🤖', position: 'center', highlight: true },
-  { id: 'wyniki', label: 'WYNIKI', icon: '❤️', position: 'bottom-right' },
-  { id: 'wspolpraca', label: 'WSPÓŁPRACA', icon: '📄', position: 'top-right' },
+  { id: 'profil', label: 'PROFIL', position: 0 },
+  { id: 'wiedza', label: 'WIEDZA', position: 1 },
+  { id: 'asystent', label: 'ASYSTENT', position: 2, highlight: true },
+  { id: 'wyniki', label: 'WYNIKI', position: 3 },
+  { id: 'wspolpraca', label: 'WSPÓŁPRACA', position: 4 },
 ];
 
 export default function Hero() {
@@ -60,153 +59,75 @@ export default function Hero() {
                     filter: 'drop-shadow(0 10px 30px rgba(76, 175, 80, 0.3))'
                   }}
                 />
-                
-                {/* Mniejszy kółek w prawym górnym rogu głowy z ikoną robota (Asystent) */}
-                <div
-                  className="absolute rounded-full bg-wellysa-green flex items-center justify-center"
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    top: '20px',
-                    right: '20px',
-                    border: '3px solid white',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                  }}
-                >
-                  <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                    <AssistantIcon className="w-6 h-6 text-wellysa-green" />
-                  </div>
-                </div>
               </div>
 
-              {/* 4 ikony równomiernie rozmieszczone wokół głowy ludzika - styl line-art */}
-              {/* PROFIL - top-left */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                onClick={() => scrollToSection('profil')}
-                className={`
-                  absolute rounded-full flex items-center justify-center
-                  transition-all shadow-lg
-                  ${activeItem === 'profil' 
-                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
-                    : ''
-                  }
-                `}
+              {/* 5 ikon w linii na wysokości klatki piersiowej ludzika */}
+              {/* Używamy obrazu PNG z ikonami jeśli dostępny, w przeciwnym razie SVG */}
+              <div 
+                className="absolute flex items-center justify-center"
                 style={{
-                  width: '56px',
-                  height: '56px',
-                  top: '20px',
-                  left: '-30px',
-                  background: activeItem === 'profil' ? '#4CAF50' : '#4CAF50',
-                  border: '3px solid white',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                  top: '180px', // Wysokość klatki piersiowej
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 10,
+                  width: '320px' // Szerokość dla 5 ikon z odstępami
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                title="PROFIL"
               >
-                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                  <ProfileIcon className="w-5 h-5 text-wellysa-green" />
+                {/* Obraz PNG z ikonami - jeśli dostępny */}
+                <Image
+                  src="/icons-line.png"
+                  alt="Navigation Icons"
+                  width={320}
+                  height={56}
+                  className="object-contain"
+                  style={{ display: 'none' }} // Ukryj domyślnie, pokaż tylko jeśli plik istnieje
+                  onError={(e) => {
+                    // Jeśli obraz nie istnieje, ukryj go
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                  onLoad={(e) => {
+                    // Jeśli obraz się załadował, pokaż go i ukryj przyciski SVG
+                    (e.target as HTMLImageElement).style.display = 'block';
+                    const buttons = document.querySelectorAll('.icon-button-svg');
+                    buttons.forEach(btn => (btn as HTMLElement).style.display = 'none');
+                  }}
+                />
+                
+                {/* Fallback: SVG ikony w linii */}
+                <div className="flex items-center justify-center gap-2 icon-button-svg">
+                  {navItems.map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`
+                        rounded-full flex items-center justify-center
+                        transition-all shadow-lg cursor-pointer icon-button-svg
+                        ${activeItem === item.id 
+                          ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                          : 'hover:scale-105'
+                        }
+                      `}
+                      style={{
+                        width: '56px',
+                        height: '56px',
+                        background: item.highlight ? '#4CAF50' : '#4CAF50',
+                        border: '3px solid white',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                      }}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      title={item.label}
+                    >
+                      <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                        <span className="text-xs text-wellysa-green font-bold">{item.label.charAt(0)}</span>
+                      </div>
+                    </motion.button>
+                  ))}
                 </div>
-              </motion.button>
-
-              {/* WSPÓŁPRACA - top-right */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                onClick={() => scrollToSection('wspolpraca')}
-                className={`
-                  absolute rounded-full flex items-center justify-center
-                  transition-all shadow-lg
-                  ${activeItem === 'wspolpraca' 
-                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
-                    : ''
-                  }
-                `}
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  top: '20px',
-                  right: '-30px',
-                  background: '#4CAF50',
-                  border: '3px solid white',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                title="WSPÓŁPRACA"
-              >
-                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                  <CollaborationIcon className="w-5 h-5 text-wellysa-green" />
-                </div>
-              </motion.button>
-
-              {/* WIEDZA - bottom-left */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => scrollToSection('wiedza')}
-                className={`
-                  absolute rounded-full flex items-center justify-center
-                  transition-all shadow-lg
-                  ${activeItem === 'wiedza' 
-                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
-                    : ''
-                  }
-                `}
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  bottom: '100px',
-                  left: '-30px',
-                  background: '#4CAF50',
-                  border: '3px solid white',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                title="WIEDZA"
-              >
-                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                  <KnowledgeIcon className="w-5 h-5 text-wellysa-green" />
-                </div>
-              </motion.button>
-
-              {/* WYNIKI - bottom-right */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => scrollToSection('wyniki')}
-                className={`
-                  absolute rounded-full flex items-center justify-center
-                  transition-all shadow-lg
-                  ${activeItem === 'wyniki' 
-                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
-                    : ''
-                  }
-                `}
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  bottom: '100px',
-                  right: '-30px',
-                  background: '#4CAF50',
-                  border: '3px solid white',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                title="WYNIKI"
-              >
-                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                  <ResultsIcon className="w-5 h-5 text-wellysa-green" />
-                </div>
-              </motion.button>
+              </div>
             </motion.div>
 
             {/* Etykieta aktywnej sekcji pod ludzikiem */}
