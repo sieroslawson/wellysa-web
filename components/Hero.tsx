@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
+import { ProfileIcon, KnowledgeIcon, AssistantIcon, ResultsIcon, CollaborationIcon } from './Icons';
 
 // Pozycje ikon - dostosowane do obrazu PNG (ikony są równomiernie rozmieszczone)
 // Jeśli obraz ma 320px szerokości i 5 ikon po ~56px każda z odstępami
@@ -130,37 +131,46 @@ export default function Hero() {
                 {/* Fallback: SVG ikony jeśli obraz PNG nie istnieje */}
                 {!iconsImageLoaded && (
                   <div className="flex items-center justify-center gap-2">
-                    {navItems.map((item, index) => (
-                      <motion.button
-                        key={item.id}
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 + index * 0.1 }}
-                        onClick={() => scrollToSection(item.id)}
-                        className={`
-                          rounded-full flex items-center justify-center
-                          transition-all shadow-lg cursor-pointer
-                          ${activeItem === item.id 
-                            ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
-                            : 'hover:scale-105'
-                          }
-                        `}
-                        style={{
-                          width: '56px',
-                          height: '56px',
-                          background: '#4CAF50',
-                          border: '3px solid white',
-                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                        }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        title={item.label}
-                      >
-                        <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
-                          <span className="text-xs text-wellysa-green font-bold">{item.label.charAt(0)}</span>
-                        </div>
-                      </motion.button>
-                    ))}
+                    {navItems.map((item, index) => {
+                      const IconComponent = 
+                        item.id === 'profil' ? ProfileIcon :
+                        item.id === 'wiedza' ? KnowledgeIcon :
+                        item.id === 'asystent' ? AssistantIcon :
+                        item.id === 'wyniki' ? ResultsIcon :
+                        CollaborationIcon;
+                      
+                      return (
+                        <motion.button
+                          key={item.id}
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 + index * 0.1 }}
+                          onClick={() => scrollToSection(item.id)}
+                          className={`
+                            rounded-full flex items-center justify-center
+                            transition-all shadow-lg cursor-pointer
+                            ${activeItem === item.id 
+                              ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                              : 'hover:scale-105'
+                            }
+                          `}
+                          style={{
+                            width: '56px',
+                            height: '56px',
+                            background: '#4CAF50',
+                            border: '3px solid white',
+                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                          }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          title={item.label}
+                        >
+                          <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                            <IconComponent className="w-5 h-5 text-wellysa-green" />
+                          </div>
+                        </motion.button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
