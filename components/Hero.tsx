@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
+import { ProfileIcon, KnowledgeIcon, AssistantIcon, ResultsIcon, CollaborationIcon } from './Icons';
 
 const navItems = [
   { id: 'profil', label: 'PROFIL', icon: '👤', position: 'top-left' },
@@ -60,9 +61,9 @@ export default function Hero() {
                   }}
                 />
                 
-                {/* Mniejszy kółek w prawym górnym rogu głowy z emoji robota (Asystent) */}
+                {/* Mniejszy kółek w prawym górnym rogu głowy z ikoną robota (Asystent) */}
                 <div
-                  className="absolute rounded-full bg-green-100 flex items-center justify-center"
+                  className="absolute rounded-full bg-wellysa-green flex items-center justify-center"
                   style={{
                     width: '60px',
                     height: '60px',
@@ -72,11 +73,13 @@ export default function Hero() {
                     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                   }}
                 >
-                  <span className="text-3xl">🤖</span>
+                  <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                    <AssistantIcon className="w-6 h-6 text-wellysa-green" />
+                  </div>
                 </div>
               </div>
 
-              {/* 4 ikony równomiernie rozmieszczone wokół głowy ludzika */}
+              {/* 4 ikony równomiernie rozmieszczone wokół głowy ludzika - styl line-art */}
               {/* PROFIL - top-left */}
               <motion.button
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -84,22 +87,29 @@ export default function Hero() {
                 transition={{ delay: 0.3 }}
                 onClick={() => scrollToSection('profil')}
                 className={`
-                  absolute w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg bg-white border-2
+                  absolute rounded-full flex items-center justify-center
+                  transition-all shadow-lg
                   ${activeItem === 'profil' 
-                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
-                    : 'border-gray-300 hover:border-wellysa-green'
+                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                    : ''
                   }
                 `}
                 style={{
+                  width: '56px',
+                  height: '56px',
                   top: '20px',
-                  left: '-30px'
+                  left: '-30px',
+                  background: activeItem === 'profil' ? '#4CAF50' : '#4CAF50',
+                  border: '3px solid white',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 title="PROFIL"
               >
-                <span className="text-2xl">👤</span>
+                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                  <ProfileIcon className="w-5 h-5 text-wellysa-green" />
+                </div>
               </motion.button>
 
               {/* WSPÓŁPRACA - top-right */}
@@ -109,22 +119,29 @@ export default function Hero() {
                 transition={{ delay: 0.3 }}
                 onClick={() => scrollToSection('wspolpraca')}
                 className={`
-                  absolute w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg bg-white border-2
+                  absolute rounded-full flex items-center justify-center
+                  transition-all shadow-lg
                   ${activeItem === 'wspolpraca' 
-                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
-                    : 'border-gray-300 hover:border-wellysa-green'
+                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                    : ''
                   }
                 `}
                 style={{
+                  width: '56px',
+                  height: '56px',
                   top: '20px',
-                  right: '-30px'
+                  right: '-30px',
+                  background: '#4CAF50',
+                  border: '3px solid white',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 title="WSPÓŁPRACA"
               >
-                <span className="text-2xl">📄</span>
+                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                  <CollaborationIcon className="w-5 h-5 text-wellysa-green" />
+                </div>
               </motion.button>
 
               {/* WIEDZA - bottom-left */}
@@ -134,22 +151,29 @@ export default function Hero() {
                 transition={{ delay: 0.4 }}
                 onClick={() => scrollToSection('wiedza')}
                 className={`
-                  absolute w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg bg-white border-2
+                  absolute rounded-full flex items-center justify-center
+                  transition-all shadow-lg
                   ${activeItem === 'wiedza' 
-                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
-                    : 'border-gray-300 hover:border-wellysa-green'
+                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                    : ''
                   }
                 `}
                 style={{
+                  width: '56px',
+                  height: '56px',
                   bottom: '100px',
-                  left: '-30px'
+                  left: '-30px',
+                  background: '#4CAF50',
+                  border: '3px solid white',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 title="WIEDZA"
               >
-                <span className="text-2xl">📚</span>
+                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                  <KnowledgeIcon className="w-5 h-5 text-wellysa-green" />
+                </div>
               </motion.button>
 
               {/* WYNIKI - bottom-right */}
@@ -159,22 +183,29 @@ export default function Hero() {
                 transition={{ delay: 0.4 }}
                 onClick={() => scrollToSection('wyniki')}
                 className={`
-                  absolute w-14 h-14 rounded-full flex items-center justify-center
-                  transition-all shadow-lg bg-white border-2
+                  absolute rounded-full flex items-center justify-center
+                  transition-all shadow-lg
                   ${activeItem === 'wyniki' 
-                    ? 'border-wellysa-green scale-110 ring-2 ring-wellysa-green' 
-                    : 'border-gray-300 hover:border-wellysa-green'
+                    ? 'scale-110 ring-4 ring-wellysa-green ring-opacity-30' 
+                    : ''
                   }
                 `}
                 style={{
+                  width: '56px',
+                  height: '56px',
                   bottom: '100px',
-                  right: '-30px'
+                  right: '-30px',
+                  background: '#4CAF50',
+                  border: '3px solid white',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 title="WYNIKI"
               >
-                <span className="text-2xl">❤️</span>
+                <div className="rounded-full bg-white w-10 h-10 flex items-center justify-center">
+                  <ResultsIcon className="w-5 h-5 text-wellysa-green" />
+                </div>
               </motion.button>
             </motion.div>
 
