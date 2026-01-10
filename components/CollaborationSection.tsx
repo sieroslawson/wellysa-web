@@ -8,7 +8,7 @@ const collaborationTypes = [
     id: 'klient',
     title: 'Klient',
     description: 'Jesteś zainteresowany usługami Wellysa?',
-    cta: 'Pobierz Apkę',
+    cta: 'Sprawdź pełną wersję aplikacji',
     icon: '👤',
   },
   {

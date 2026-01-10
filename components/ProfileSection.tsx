@@ -65,7 +65,7 @@ export default function ProfileSection() {
               rel="noopener noreferrer"
               className="inline-block px-8 py-4 bg-wellysa-green text-white rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors shadow-lg"
             >
-              Pobierz Apkę i Utwórz Profil
+Sprawdź pełną wersję aplikacji
             </a>
           </div>
         </div>

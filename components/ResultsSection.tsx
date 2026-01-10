@@ -72,7 +72,7 @@ export default function ResultsSection() {
               rel="noopener noreferrer"
               className="inline-block px-8 py-4 bg-wellysa-green text-white rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors shadow-lg"
             >
-              Tu Znajdziesz Swoje Metryki – Pobierz Apkę
+Tu Znajdziesz Swoje Metryki – Sprawdź pełną wersję aplikacji
             </a>
           </div>
         </div>

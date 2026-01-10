@@ -68,7 +68,7 @@ export default function KnowledgeSection() {
             rel="noopener noreferrer"
             className="inline-block px-8 py-3 bg-wellysa-green text-white rounded-lg font-semibold hover:bg-green-600 transition-colors"
           >
-            Pobierz Apkę i Dowiedz Się Więcej
+Sprawdź pełną wersję aplikacji
           </a>
         </div>
       </div>

@@ -134,7 +134,7 @@ export default function OnboardingFlow() {
                       onClick={nextStep}
                       className="flex-1 px-6 py-2 bg-wellysa-green text-white rounded-lg hover:bg-green-600 transition-colors"
                     >
-                      {currentStep === onboardingSteps.length - 1 ? 'Pobierz Apkę' : 'Dalej'}
+                      {currentStep === onboardingSteps.length - 1 ? 'Sprawdź pełną wersję aplikacji' : 'Dalej'}
                     </button>
                   </div>
                 </motion.div>

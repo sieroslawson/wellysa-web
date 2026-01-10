@@ -191,7 +191,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="px-8 py-4 bg-wellysa-green text-white rounded-lg font-semibold hover:bg-green-600 transition-colors shadow-lg"
             >
-              Pobierz Apkę
+Sprawdź pełną wersję aplikacji
             </a>
             <button
               onClick={() => {
