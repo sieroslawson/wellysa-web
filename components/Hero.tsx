@@ -157,38 +157,26 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Etykieta aktywnej sekcji pod ludzikiem */}
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center w-full">
-              {activeItem && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-2xl font-bold text-gray-900"
-                >
-                  {navItems.find(item => item.id === activeItem)?.label}
-                </motion.div>
-              )}
+            {/* Podpis pod awatarem */}
+            <div className="mt-8 text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="text-5xl md:text-6xl font-bold mb-3 text-gray-900"
+              >
+                Wellysa
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+                className="text-xl md:text-2xl text-gray-600"
+              >
+                Osobisty Asystent Zdrowia
+              </motion.p>
             </div>
           </div>
-
-          {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-5xl md:text-6xl font-bold mb-6 text-gray-900"
-          >
-            Wellysa
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl text-center"
-          >
-            Twój osobisty asystent zdrowia
-          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
